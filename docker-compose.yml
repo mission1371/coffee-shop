@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  db-postgres:
+    build:
+      context: production/postgres
+      dockerfile: Dockerfile
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_PASSWORD=password
+    ports:
+      - 5432:5432
+    shm_size: 1g
+    networks:
+      - coffee-shop-network
+  server:
+    environment:
+      - APP_PROFILE=production
+    container_name: coffee-shop-server
+    build:
+      context: server
+      dockerfile: etc/Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - db-postgres
+    networks:
+      - coffee-shop-network
+  client:
+    build:
+      context: client
+      dockerfile: etc/Dockerfile
+    container_name: coffee-shop-client
+    ports:
+      - 4200:8080
+    depends_on:
+      - server
+    networks:
+      - coffee-shop-network
+networks:
+  coffee-shop-network:

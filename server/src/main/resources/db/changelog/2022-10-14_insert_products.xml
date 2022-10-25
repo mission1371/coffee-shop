@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.15.xsd">
+
+    <changeSet author="umut.taherzadeh" id="2022-10-14_insert_products" context="!test">
+        <loadData encoding="UTF-8" file="dump/product-data.csv" tableName="PRODUCT" relativeToChangelogFile="true">
+            <column index="0" name="TYPE"/>
+            <column index="1" name="NAME"/>
+            <column index="2" name="PRICE"/>
+            <column index="3" name="CURRENCY_CODE"/>
+            <column index="4" name="STOCK"/>
+            <column index="5" name="CREATED_AT"/>
+            <column index="6" name="CREATED_BY"/>
+            <column index="7" name="MODIFIED_AT"/>
+            <column index="8" name="MODIFIED_BY"/>
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>

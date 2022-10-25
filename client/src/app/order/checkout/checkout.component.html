@@ -1,0 +1,48 @@
+<div class="d-flex flex-row">
+  <app-cart class="w-50"></app-cart>
+  <div class="d-flex flex-column w-50">
+    <div class="px-2 d-flex align-items-center ">
+      <mat-form-field class="w-50">
+        <mat-label>Given amount</mat-label>
+        <input matInput type="number" [formControl]="amount"/>
+        <span matPrefix class="pe-1">&euro;</span>
+        <button matSuffix mat-icon-button [disabled]="amount.disabled" (click)="amount.reset()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="amount.hasError('required')">Amount is required</mat-error>
+        <mat-error *ngIf="amount.hasError('min')">Not enough money</mat-error>
+      </mat-form-field>
+      <div *ngIf="data.cart.total < amount.value" class="w-50 text-end mat-body-strong">
+        Exchange: {{(amount.value - data.cart.total) | currency:'EUR'}}
+      </div>
+    </div>
+    <div class="d-flex flex-wrap h-100">
+      <div class="p-1 d-flex justify-content-between flex-grow-1">
+        <button (click)="increaseAmount(50)" mat-stroked-button color="primary" class="m-1">&euro; 50</button>
+        <button (click)="increaseAmount(20)" mat-stroked-button color="primary" class="m-1">&euro; 20</button>
+        <button (click)="increaseAmount(10)" mat-stroked-button color="primary" class="m-1">&euro; 10</button>
+        <button (click)="increaseAmount(5)" mat-stroked-button color="primary" class="m-1">&euro; 5</button>
+      </div>
+      <div class="p-1 d-flex justify-content-between flex-grow-1">
+        <button (click)="increaseAmount(2)" mat-stroked-button color="primary" class="m-1">&euro; 2</button>
+        <button (click)="increaseAmount(1)" mat-stroked-button color="primary" class="m-1">&euro; 1</button>
+        <button (click)="increaseAmount(0.5)" mat-stroked-button color="primary" class="m-1">&cent; 50</button>
+        <button (click)="increaseAmount(0.2)" mat-stroked-button color="primary" class="m-1">&cent; 20</button>
+      </div>
+      <div class="p-1 d-flex justify-content-between flex-grow-1">
+        <button (click)="increaseAmount(0.1)" mat-stroked-button color="primary" class="m-1">&cent; 10</button>
+        <button (click)="increaseAmount(0.05)" mat-stroked-button color="primary" class="m-1">&cent; 5</button>
+        <button (click)="increaseAmount(0.02)" mat-stroked-button color="primary" class="m-1">&cent; 2</button>
+        <button (click)="increaseAmount(0.01)" mat-stroked-button color="primary" class="m-1">&cent; 1</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<mat-divider class="my-2"></mat-divider>
+<div class="d-flex flex-row justify-content-end p-1">
+  <button class="m-1" mat-flat-button color="accent" (click)="dialogRef.close()">Close</button>
+  <button class="m-1" mat-flat-button color="primary" (click)="pay()">Pay</button>
+</div>
+
+<app-overlay *ngIf="requestInProgress"></app-overlay>

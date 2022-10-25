@@ -1,0 +1,16 @@
+application:
+  database:
+    name: coffee_shop
+    url: db-postgres:5432
+    username: coffee_shop_server
+    password: CSS_12!@
+
+spring:
+  liquibase:
+    url: jdbc:postgresql://${application.database.url}/${application.database.name}
+    user: ${application.database.username}
+    password: ${application.database.password}
+  r2dbc:
+    url: r2dbc:postgresql://${application.database.url}/${application.database.name}
+    username: ${application.database.username}
+    password: ${application.database.password}

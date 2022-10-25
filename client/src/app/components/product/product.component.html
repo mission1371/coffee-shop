@@ -1,0 +1,21 @@
+<mat-card [matBadge]="selectedAmount ? selectedAmount : null" matBadgeSize="large">
+  <div class="d-flex mat-body-strong">
+    <span class="flex-grow-1 text-truncate">{{product.name}}</span>
+    <span class="me-5">{{product.price | currency: product.currencyCode:'symbol'}}</span>
+  </div>
+  <div class="mat-card-subtitle">{{outOfStock ? 'Not available' : product.stock - selectedAmount + ' left'}}</div>
+  <div class="d-block jx-img-container" [ngClass]="outOfStock ? 'jx-out-of-stock' : ''">
+    <img [src]="'/api' + product.src" (click)="selectProduct()">
+  </div>
+  <div class="d-flex justify-content-between pt-3">
+    <button mat-flat-button color="primary" [disabled]="outOfStock" (click)="selectProduct()">
+      <mat-icon>add</mat-icon>
+    </button>
+    <button mat-flat-button color="accent" [disabled]="selectedAmount === 0" (click)="unselectAllProducts()">
+      <mat-icon>clear_all</mat-icon>
+    </button>
+    <button mat-flat-button color="primary" [disabled]="selectedAmount === 0" (click)="unselectProduct()">
+      <mat-icon>remove</mat-icon>
+    </button>
+  </div>
+</mat-card>

@@ -1,0 +1,67 @@
+<div class="p-1 d-flex flex-row overflow-auto h-100">
+  <mat-accordion multi class="p-1 w-75 overflow-auto">
+    <mat-expansion-panel expanded class="rounded-0">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Consumables
+        </mat-panel-title>
+        <mat-panel-description>
+          Foods & Beverages
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-divider class="mb-2"></mat-divider>
+      <div class="pt-2 d-flex flex-wrap justify-content-evenly">
+        <app-product
+          class="m-2"
+          *ngFor="let product of consumables"
+          [product]="product"
+          (selected)="onSelect($event)"
+          (removed)="onRemove($event)"
+          (unselectAll)="onRemoveAll($event)"
+        ></app-product>
+      </div>
+
+    </mat-expansion-panel>
+    <mat-expansion-panel expanded class="rounded-0">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Donations
+        </mat-panel-title>
+        <mat-panel-description>
+          Toys & Cloths
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-divider class="mb-2"></mat-divider>
+
+      <div class="pt-2 d-flex flex-wrap justify-content-evenly">
+        <app-product
+          class="m-2"
+          *ngFor="let product of donatables"
+          [product]="product"
+          (selected)="onSelect($event)"
+          (removed)="onRemove($event)"
+          (unselectAll)="onRemoveAll($event)"
+        ></app-product>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div class="m-1 mat-elevation-z2 flex-grow-1 overflow-auto">
+
+    <app-cart></app-cart>
+
+    <mat-divider class="m-2"></mat-divider>
+
+    <div class="d-flex flex-column p-1">
+      <button class="m-1" mat-flat-button color="accent" (click)="emptyBasket()">
+        <mat-icon>remove_shopping_cart</mat-icon>
+        Clear shopping cart
+      </button>
+      <button class="m-1" mat-flat-button color="primary" (click)="checkout()">
+        <mat-icon>payment</mat-icon>
+        Checkout
+      </button>
+    </div>
+  </div>
+</div>
+<app-overlay *ngIf="requestInProgress"></app-overlay>

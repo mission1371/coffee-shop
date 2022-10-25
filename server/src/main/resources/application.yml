@@ -1,0 +1,30 @@
+spring:
+  webflux:
+    base-path: '/api'
+  profiles:
+    group:
+      development: postgres, debug
+      production: postgres
+    default: development
+  liquibase:
+    change-log: classpath:db/changelog/master.xml
+
+---
+spring:
+  config:
+    activate:
+      on-profile: postgres
+  datasource:
+    driver-class-name: org.postgresql.Driver
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: debug
+logging:
+  level:
+    org:
+      springframework:
+        data.data.r2dbc: DEBUG

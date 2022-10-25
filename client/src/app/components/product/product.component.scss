@@ -1,0 +1,19 @@
+.jx-img-container {
+  cursor: pointer;
+
+  img {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+  }
+
+  &.jx-out-of-stock {
+    cursor: not-allowed;
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    filter: grayscale(100%);
+    opacity: 0.3;
+  }
+}
